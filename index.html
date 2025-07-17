@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สมัครเข้าร่วมกลุ่ม Pharmastart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #f0f7ff;
+        }
+        .form-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f9ff 100%);
+            box-shadow: 0 10px 25px rgba(0, 62, 154, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0052cc 0%, #003399 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 82, 204, 0.3);
+        }
+        .input-field {
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+        }
+        .input-field:focus {
+            border-color: #0052cc;
+            box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.2);
+        }
+        .file-upload-label {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+            border: 2px dashed #0052cc;
+            transition: all 0.3s ease;
+        }
+        .file-upload-label:hover {
+            background: linear-gradient(135deg, #e6f0ff 0%, #d9e8ff 100%);
+        }
+        .header-gradient {
+            background: linear-gradient(135deg, #003399 0%, #0052cc 100%);
+        }
+        .loading-overlay {
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 1000;
+        }
+        .spinner {
+            border-top-color: #0052cc;
+        }
+        
+        /* Mascot Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes blink {
+            0% { transform: scaleY(1); }
+            20% { transform: scaleY(0.1); }
+            25% { transform: scaleY(1); }
+            100% { transform: scaleY(1); }
+        }
+        
+        @keyframes sparkle {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+        
+        .mascot-container {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .mascot-glow {
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        .mascot-eye {
+            animation: blink 5s infinite;
+            transform-origin: center;
+        }
+        
+        .mascot-sparkle {
+            animation: sparkle 2s infinite;
+        }
+        
+        .mascot-sparkle:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        .mascot-sparkle:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        
+        .mascot-sparkle:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+        
+        .mascot-sparkle:nth-child(5) {
+            animation-delay: 1.2s;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-8 px-4 sm:px-6">
+    <div class="max-w-3xl mx-auto">
+        <div class="header-gradient rounded-t-lg py-6 px-6 text-white text-center relative">
+            <!-- Mascot SVG -->
+            <div class="flex justify-center mb-4">
+                <div class="relative w-24 h-24 sm:w-32 sm:h-32 mascot-container">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                        <!-- Glow Effect -->
+                        <circle cx="100" cy="120" r="85" fill="rgba(255,255,255,0.15)" class="mascot-glow" />
+                        
+                        <!-- Pharmacy Bottle -->
+                        <rect x="60" y="80" width="80" height="100" rx="10" fill="#ffffff" stroke="#003399" stroke-width="2" />
+                        <rect x="70" y="80" width="60" height="20" rx="5" fill="#0052cc" />
+                        
+                        <!-- Label -->
+                        <rect x="70" y="110" width="60" height="40" rx="3" fill="#e6f0ff" stroke="#0052cc" stroke-width="1" />
+                        
+                        <!-- Cross Symbol -->
+                        <rect x="85" y="120" width="30" height="10" rx="2" fill="#0052cc" />
+                        <rect x="95" y="110" width="10" height="30" rx="2" fill="#0052cc" />
+                        
+                        <!-- Face -->
+                        <circle cx="85" cy="160" r="5" fill="#003399" class="mascot-eye" />
+                        <circle cx="115" cy="160" r="5" fill="#003399" class="mascot-eye" />
+                        <path d="M90 175 Q100 185 110 175" stroke="#003399" stroke-width="3" fill="none" />
+                        
+                        <!-- Cap -->
+                        <rect x="70" y="60" width="60" height="20" rx="5" fill="#003399" />
+                        <rect x="75" y="65" width="50" height="10" rx="3" fill="#0052cc" />
+                        
+                        <!-- Arms -->
+                        <path d="M60 130 Q40 140 45 160" stroke="#ffffff" stroke-width="3" fill="none" />
+                        <path d="M140 130 Q160 140 155 160" stroke="#ffffff" stroke-width="3" fill="none" />
+                        
+                        <!-- Sparkles -->
+                        <circle cx="45" cy="160" r="4" fill="#ffffff" class="mascot-sparkle" />
+                        <circle cx="155" cy="160" r="4" fill="#ffffff" class="mascot-sparkle" />
+                        <circle cx="40" cy="100" r="3" fill="#ffffff" class="mascot-sparkle" />
+                        <circle cx="160" cy="100" r="3" fill="#ffffff" class="mascot-sparkle" />
+                        <circle cx="100" cy="40" r="3" fill="#ffffff" class="mascot-sparkle" />
+                        
+                        <!-- Stethoscope -->
+                        <path d="M45 160 Q30 140 50 130 Q60 125 70 135" stroke="#0052cc" stroke-width="2" fill="none" />
+                        <circle cx="45" cy="160" r="6" fill="#003399" stroke="#ffffff" stroke-width="1" />
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-bold mb-2">สมัครเข้าร่วมกลุ่ม Pharmastart : การเริ่มต้นทำธุรกิจร้านยา</h1>
+            <h2 class="text-lg sm:text-xl font-medium">จากร้านเล็กสู่ 8 สาขา แชร์วิธีคิด วิธีเริ่ม ฉบับคลินิคยา มอ ออ</h2>
+        </div>
+        
+        <div class="form-container rounded-b-lg p-6 sm:p-8">
+            <form id="registrationForm" class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">ชื่อ <span class="text-red-500">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required class="input-field w-full px-4 py-2 rounded-lg focus:outline-none" placeholder="กรุณากรอกชื่อ">
+                    </div>
+                    <div>
+                        <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">นามสกุล <span class="text-red-500">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required class="input-field w-full px-4 py-2 rounded-lg focus:outline-none" placeholder="กรุณากรอกนามสกุล">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">อีเมล <span class="text-red-500">*</span></label>
+                    <input type="email" id="email" name="email" required class="input-field w-full px-4 py-2 rounded-lg focus:outline-none" placeholder="example@email.com">
+                </div>
+
+                <div>
+                    <label for="facebook" class="block text-sm font-medium text-gray-700 mb-1">ชื่อ Account Facebook <span class="text-red-500">*</span></label>
+                    <input type="text" id="facebook" name="facebook" required class="input-field w-full px-4 py-2 rounded-lg focus:outline-none" placeholder="กรุณากรอกชื่อ Facebook ของคุณ">
+                </div>
+
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">เบอร์โทรศัพท์ <span class="text-red-500">*</span></label>
+                    <input type="tel" id="phone" name="phone" required class="input-field w-full px-4 py-2 rounded-lg focus:outline-none" placeholder="0xxxxxxxxx">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">รูปหลักฐานการบริจาค <span class="text-red-500">*</span></label>
+                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-lg file-upload-label">
+                        <div class="space-y-1 text-center">
+                            <svg class="mx-auto h-12 w-12 text-blue-800" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <div class="flex text-sm text-gray-600">
+                                <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-800 hover:text-blue-700 focus-within:outline-none">
+                                    <span>อัพโหลดไฟล์</span>
+                                    <input id="file-upload" name="file-upload" type="file" accept=".jpg,.jpeg,.png" class="sr-only" required>
+                                </label>
+                                <p class="pl-1">หรือลากไฟล์มาวางที่นี่</p>
+                            </div>
+                            <p class="text-xs text-gray-500">PNG, JPG เท่านั้น</p>
+                            <div id="file-name" class="text-sm text-blue-800 font-medium mt-2 hidden"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center">
+                    <input id="terms" name="terms" type="checkbox" required class="h-4 w-4 text-blue-800 focus:ring-blue-700 border-gray-300 rounded">
+                    <label for="terms" class="ml-2 block text-sm text-gray-700">
+                        ฉันยอมรับ <a href="#" class="text-blue-800 hover:text-blue-700">เงื่อนไขและข้อตกลง</a> ในการสมัครเข้าร่วมกลุ่ม
+                    </label>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn-primary w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white focus:outline-none">
+                        สมัครเข้าร่วมกลุ่ม
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 relative z-10">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                    <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-2">ลงทะเบียนสำเร็จ!</h3>
+                <div class="mt-2">
+                    <p class="text-sm text-gray-500 mb-2">ขอบพระคุณที่เป็นส่วนหนึ่งในการสร้างบุญกุศลร่วมกันกับเรา</p>
+                    <p class="text-sm text-gray-500 mb-2">ยินดีตอนรับท่าเข้าสู่ Pharmastart กลุ่มที่จะนำท่านไปเรียนรู้เทคนิคการเริ่มต้นร้านยา ผ่านประสบการณ์ตรงกว่า 12 ปีจากร้านเล็กสู่ 8 สาขา</p>
+                    <p class="text-sm text-gray-500">กรุณาคลิก link นี้ เพื่อเข้าร่วมกลุ่ม <a href="https://www.facebook.com/groups/" class="text-blue-800 hover:underline" target="_blank">https://www.facebook.com/groups/</a> (admin จะทำการอนุมัติต่อไป)</p>
+                </div>
+                <div class="mt-5">
+                    <button type="button" id="closeModal" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-800 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:text-sm">
+                        ปิด
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 flex items-center justify-center loading-overlay hidden">
+        <div class="spinner w-12 h-12 border-4 border-blue-200 rounded-full animate-spin"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const fileUpload = document.getElementById('file-upload');
+            const fileName = document.getElementById('file-name');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const successModal = document.getElementById('successModal');
+            const closeModal = document.getElementById('closeModal');
+
+            // Display file name when selected
+            fileUpload.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const file = this.files[0];
+                    // Check if file is jpg or png
+                    const fileType = file.type;
+                    if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+                        alert('กรุณาอัพโหลดไฟล์ .jpg หรือ .png เท่านั้น');
+                        this.value = '';
+                        fileName.classList.add('hidden');
+                        return;
+                    }
+                    
+                    fileName.textContent = file.name;
+                    fileName.classList.remove('hidden');
+                }
+            });
+
+            // Handle form submission
+            form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Validate form
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    // Show loading overlay
+    loadingOverlay.classList.remove('hidden');
+
+    const file = fileUpload.files[0];
+
+    if (!file) {
+        alert('กรุณาเลือกไฟล์รูปก่อนส่ง');
+        loadingOverlay.classList.add('hidden');
+        return;
+    }
+
+    // ตรวจสอบว่าไฟล์เป็น jpg หรือ png
+    const fileType = file.type;
+    if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+        alert('กรุณาอัพโหลดไฟล์ .jpg หรือ .png เท่านั้น');
+        loadingOverlay.classList.add('hidden');
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const base64String = event.target.result.split(',')[1]; // ลบ prefix เช่น data:image/jpeg;base64, ออก
+        const formData = new FormData(form);
+
+        // เพิ่ม base64 เข้าไป
+        formData.append('file-upload', base64String);
+
+        // ส่งข้อมูลไปยัง Google Apps Script
+        fetch('https://script.google.com/macros/s/AKfycbw3N_X8j820zqCGub0wwhjt4NJDoZJrvNumKok2m-gxLoSlfL7v9KF8cLgijW2olSRA/exec', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            loadingOverlay.classList.add('hidden');
+            if (data.result === 'success') {
+                successModal.classList.remove('hidden');
+                form.reset();
+                fileName.classList.add('hidden');
+            } else {
+                alert('เกิดข้อผิดพลาด: ' + data.error);
+            }
+        })
+        .catch(error => {
+            loadingOverlay.classList.add('hidden');
+            alert('เกิดข้อผิดพลาด: ' + error.message);
+        });
+    };
+
+    reader.readAsDataURL(file); // อ่านไฟล์เป็น base64
+});
+            });
+
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                successModal.classList.add('hidden');
+            });
+
+            // Allow drag and drop for file upload
+            const dropArea = document.querySelector('.file-upload-label');
+            
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            function highlight() {
+                dropArea.classList.add('bg-blue-50');
+            }
+            
+            function unhighlight() {
+                dropArea.classList.remove('bg-blue-50');
+            }
+            
+            dropArea.addEventListener('drop', handleDrop, false);
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const file = dt.files[0];
+                
+                if (file) {
+                    // Check if file is jpg or png
+                    const fileType = file.type;
+                    if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+                        alert('กรุณาอัพโหลดไฟล์ .jpg หรือ .png เท่านั้น');
+                        return;
+                    }
+                    
+                    fileUpload.files = dt.files;
+                    fileName.textContent = file.name;
+                    fileName.classList.remove('hidden');
+                }
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9606e76b90e41d2f',t:'MTc1MjcyNTU3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
